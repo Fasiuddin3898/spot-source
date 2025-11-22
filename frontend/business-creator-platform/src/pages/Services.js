@@ -38,6 +38,7 @@ import {
   Work,
 } from '@mui/icons-material';
 import { keyframes } from '@emotion/react';
+import girlCreator from '../assets/images/services.jpg';
 import Header from '../components/Header';
 import { responsiveConfig } from '../config/responsiveConfig';
 import Layout from '../components/Layout';
@@ -59,6 +60,14 @@ const Services = () => {
   const [openCreatorDialog, setOpenCreatorDialog] = useState(false);
   const [openClientDialog, setOpenClientDialog] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+
+  const handleContactRedirect = () => {
+    window.location.href = '/contactus#business-form';
+  };
+
+  const handleJoinTeamRedirect = () => {
+    window.location.href = '/contactus#creator-form';
+  };
 
   // Hero Section Data
   const heroData = {
@@ -197,8 +206,15 @@ const Services = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        position: 'relative',
+        background: `
+          linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url(${girlCreator})
+        `,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
+        backgroundRepeat: 'no-repeat',
       }}
     >
       {/* Dynamic Header */}
@@ -214,7 +230,7 @@ const Services = () => {
       {/* Hero Section */}
       <Box
         sx={{
-          background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%)',
+          // background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%)',
           color: 'white',
           py: 12,
           textAlign: 'center',
@@ -297,9 +313,9 @@ const Services = () => {
           Choose Your Path to Success
         </Typography>
 
-        <Box container spacing={4}>
+        <Grid container spacing={4}>
           {/* User Side */}
-          <Box item xs={12} md={6}>
+          <Grid item xs={12} md={6} size={6}>
             <Card
               sx={{
                 background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
@@ -337,7 +353,7 @@ const Services = () => {
               <Button
                 variant="contained"
                 size="large"
-                onClick={handleCreatorOpen}
+                onClick={handleJoinTeamRedirect}
                 sx={{
                   background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
                   color: 'white',
@@ -355,10 +371,10 @@ const Services = () => {
                 Earn On-The-Spot: Sign Up
               </Button>
             </Card>
-          </Box>
+          </Grid>
 
           {/* Client Side */}
-          <Box item xs={12} md={6}>
+          <Grid item xs={12} md={6} size={6}>
             <Card
               sx={{
                 background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
@@ -396,7 +412,7 @@ const Services = () => {
               <Button
                 variant="contained"
                 size="large"
-                onClick={handleClientOpen}
+                onClick={handleContactRedirect}
                 sx={{
                   background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
                   color: 'white',
@@ -414,8 +430,8 @@ const Services = () => {
                 View Marketing Packages
               </Button>
             </Card>
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
       </Container>
 
       {/* Services We Offer */}
@@ -436,18 +452,18 @@ const Services = () => {
           Our Digital Marketing Services
         </Typography>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={3} justifyContent="center">
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
-              <Grid item xs={12} sm={6} md={4} key={index}>
+              <Grid item xs={12} size={6} sm={6} md={4} key={index} sx={{ display: 'flex' }}>
                 <Card
                   sx={{
                     background: service.gradient,
                     color: 'white',
                     borderRadius: '20px',
                     p: 3,
-                    height: '100%',
+                    width: '100%',
                     transition: 'all 0.3s ease',
                     animation: `${floatAnimation} 3s ease-in-out infinite`,
                     animationDelay: `${index * 0.2}s`,
@@ -511,16 +527,16 @@ const Services = () => {
           Professional digital marketing solutions tailored for your business growth
         </Typography>
 
-        <Grid container spacing={4} alignItems="stretch">
+        <Grid container spacing={4} justifyContent="center" alignItems="stretch">
           {packages.map((pkg, index) => (
-            <Grid item xs={12} md={4} key={index}>
+            <Grid item xs={12} size={4} md={4} key={index} sx={{ display: 'flex' }}>
               <Card
                 sx={{
                   background: pkg.gradient,
                   color: 'white',
                   borderRadius: '25px',
                   p: 0,
-                  height: '100%',
+                  width: '100%',
                   position: 'relative',
                   overflow: 'hidden',
                   transition: 'all 0.3s ease',
@@ -580,6 +596,7 @@ const Services = () => {
                     variant="contained"
                     fullWidth
                     size="large"
+                    onClick={handleContactRedirect}
                     sx={{
                       background: 'rgba(255,255,255,0.2)',
                       color: 'white',
@@ -603,69 +620,73 @@ const Services = () => {
       </Container>
 
       {/* Additional CTA Section */}
-      <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Paper
-          sx={{
-            background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255,255,255,0.2)',
-            borderRadius: '25px',
-            p: 6,
-            textAlign: 'center',
-            color: 'white',
-          }}
-        >
-          <Typography variant="h3" component="h2" gutterBottom fontWeight="bold">
-            Need Only Influencer Marketing?
-          </Typography>
-          <Typography variant="h6" sx={{ mb: 4, opacity: 0.9 }}>
-            Connect directly with talented creators in your city
-          </Typography>
-          
-          <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Button
-              variant="contained"
-              size="large"
-              startIcon={<LocationOn />}
-              sx={{
-                background: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-                color: 'white',
-                px: 4,
-                py: 1.5,
-                borderRadius: '25px',
-                fontWeight: 'bold',
-                '&:hover': {
-                  transform: 'translateY(-3px)',
-                  boxShadow: '0 15px 30px rgba(67, 233, 123, 0.4)',
-                }
-              }}
-            >
-              Check Available Talent by City
-            </Button>
+      <Box sx={{ position: 'relative', zIndex: 1 }}>
+        <Container maxWidth="lg" sx={{ py: 8 }}>
+          <Paper
+            sx={{
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255,255,255,0.2)',
+              borderRadius: '25px',
+              p: 6,
+              textAlign: 'center',
+              color: 'white',
+              position: 'relative',
+              zIndex: 2,
+            }}
+          >
+            <Typography variant="h3" component="h2" gutterBottom fontWeight="bold">
+              Need Only Influencer Marketing?
+            </Typography>
+            <Typography variant="h6" sx={{ mb: 4, opacity: 0.9 }}>
+              Connect directly with talented creators in your city
+            </Typography>
             
-            <Button
-              variant="outlined"
-              size="large"
-              startIcon={<Schedule />}
-              sx={{
-                border: '2px solid #ffde22',
-                color: '#ffde22',
-                px: 4,
-                py: 1.5,
-                borderRadius: '25px',
-                fontWeight: 'bold',
-                '&:hover': {
-                  background: '#ffde22',
-                  color: 'black',
-                  transform: 'translateY(-3px)',
-                }
-              }}
-            >
-              Book a 15-Min Strategy Call
-            </Button>
-          </Box>
-        </Paper>
-      </Container>
+            <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Button
+                variant="contained"
+                size="large"
+                startIcon={<LocationOn />}
+                sx={{
+                  background: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+                  color: 'white',
+                  px: 4,
+                  py: 1.5,
+                  borderRadius: '25px',
+                  fontWeight: 'bold',
+                  '&:hover': {
+                    transform: 'translateY(-3px)',
+                    boxShadow: '0 15px 30px rgba(67, 233, 123, 0.4)',
+                  }
+                }}
+              >
+                Check Available Talent by City
+              </Button>
+              
+              <Button
+                variant="outlined"
+                size="large"
+                startIcon={<Schedule />}
+                sx={{
+                  border: '2px solid #ffde22',
+                  color: '#ffde22',
+                  px: 4,
+                  py: 1.5,
+                  borderRadius: '25px',
+                  fontWeight: 'bold',
+                  '&:hover': {
+                    background: '#ffde22',
+                    color: 'black',
+                    transform: 'translateY(-3px)',
+                  }
+                }}
+              >
+                Book a 15-Min Strategy Call
+              </Button>
+            </Box>
+          </Paper>
+        </Container>
+      </Box>
 
       {/* Creator Application Dialog */}
       <Dialog 
@@ -811,7 +832,7 @@ const Services = () => {
                     ))}
                   </Box>
 
-                  <Button variant="contained" fullWidth>
+                  <Button variant="contained" fullWidth onClick={handleContactRedirect}>
                     Select Package
                   </Button>
                 </Card>
@@ -824,8 +845,8 @@ const Services = () => {
           <Button onClick={handleClientClose}>Close</Button>
         </DialogActions>
       </Dialog>
-      <Layout>
-    </Layout>
+      
+      <Layout />
     </Box>
   );
 };
