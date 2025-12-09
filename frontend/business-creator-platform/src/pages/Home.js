@@ -12,16 +12,39 @@ import {
   useTheme,
   useMediaQuery,
   Grid,
-  useScrollTrigger
+  useScrollTrigger,
+  Chip,
+  Paper,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider
 } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { ConnectWithoutContact, Business, Person, Star, TrendingUp, CheckCircle } from '@mui/icons-material';
+import { Link, useNavigate } from 'react-router-dom';
+import { 
+  ConnectWithoutContact, 
+  Business, 
+  Person, 
+  Star, 
+  TrendingUp, 
+  CheckCircle,
+  RocketLaunch,
+  Groups,
+  EmojiEvents,
+  Security,
+  Analytics,
+  SupportAgent,
+  PlayArrow,
+  LocationOn,
+  Schedule,
+  ArrowForward
+} from '@mui/icons-material';
 import { keyframes } from '@emotion/react';
 import Header from '../components/Header';
 import heroBackground from '../assets/images/home_background.jpg';
 import GradientButton from '../components/GradientButton';
 import Layout from '../components/Layout';
-
 
 // Animations
 const floatAnimation = keyframes`
@@ -32,6 +55,11 @@ const floatAnimation = keyframes`
 const glowAnimation = keyframes`
   0%, 100% { box-shadow: 0 0 20px rgba(32, 22, 23, 0.3); }
   50% { box-shadow: 0 0 40px rgba(32, 22, 23, 0.6); }
+`;
+
+const pulseAnimation = keyframes`
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 `;
 
 // Custom hook for scroll trigger
@@ -48,6 +76,7 @@ const Home = () => {
   const [animatedHeading, setAnimatedHeading] = useState('');
   const fullText = 'Connect Businesses with Amazing Creators';
   const [showFeatures, setShowFeatures] = useState(false);
+  const navigate = useNavigate();
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -67,7 +96,7 @@ const Home = () => {
     return () => clearInterval(typingEffect);
   }, []);
 
-  // Feature boxes with new theme colors
+  // Feature boxes with click handlers
   const featureBoxes = [
     {
       icon: Business,
@@ -75,7 +104,9 @@ const Home = () => {
       description: 'Find the perfect creators to showcase your brand and reach new audiences with authentic content',
       gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
       features: ['Brand Visibility', 'Authentic Content', 'Targeted Audience'],
-      iconColor: '#667eea'
+      iconColor: '#667eea',
+      onClick: () => navigate('/contactus#business-form'),
+      buttonText: 'Explore Business Solutions'
     },
     {
       icon: ConnectWithoutContact,
@@ -83,7 +114,9 @@ const Home = () => {
       description: 'Seamless communication and project management tools to make collaboration effortless',
       gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
       features: ['Project Management', 'Real-time Chat', 'File Sharing'],
-      iconColor: '#f093fb'
+      iconColor: '#f093fb',
+      onClick: () => navigate('/contactus'),
+      buttonText: 'See How It Works'
     },
     {
       icon: Person,
@@ -91,46 +124,89 @@ const Home = () => {
       description: 'Discover exciting brands and monetize your creative skills with fair compensation',
       gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
       features: ['Fair Compensation', 'Creative Freedom', 'Portfolio Growth'],
-      iconColor: '#4facfe'
+      iconColor: '#4facfe',
+      onClick: () => navigate('/contactus#creator-form'),
+      buttonText: 'Join Creator Network'
     }
   ];
 
-  // Inside your component
   const scrollTriggered = useScrollAnimation(200);
 
   // Stats data
   const stats = [
-    { number: '150+', label: 'Active Creators' },
+    { number: '200+', label: 'Active Creators' },
     { number: '300+', label: 'Happy Businesses' },
     { number: '95%', label: 'Success Rate' },
     { number: '24/7', label: 'Support' }
+  ];
+
+  // Process steps
+  const processSteps = [
+    {
+      step: '01',
+      title: 'Contact & Create Profile',
+      description: 'Register your business or creator profile in minutes',
+      icon: <Person sx={{ fontSize: 40 }} />
+    },
+    {
+      step: '02',
+      title: 'Discover & Connect',
+      description: 'Find perfect matches based on your needs and preferences',
+      icon: <ConnectWithoutContact sx={{ fontSize: 40 }} />
+    },
+    {
+      step: '03',
+      title: 'Collaborate & Create',
+      description: 'Work together seamlessly with our collaboration tools',
+      icon: <Groups sx={{ fontSize: 40 }} />
+    },
+    {
+      step: '04',
+      title: 'Achieve Results',
+      description: 'Watch your brand grow with authentic content',
+      icon: <TrendingUp sx={{ fontSize: 40 }} />
+    }
+  ];
+
+  // Testimonials
+  const testimonials = [
+    {
+      name: 'Sarah Chen',
+      role: 'Marketing Director, TechStart',
+      content: 'SpotSource transformed our digital presence. The creators we found were incredibly talented and professional.',
+      rating: 5
+    },
+    {
+      name: 'Mike Rodriguez',
+      role: 'Content Creator',
+      content: 'As a creator, I\'ve doubled my income while working with amazing brands that align with my values.',
+      rating: 5
+    },
+    {
+      name: 'Emily Watson',
+      role: 'Small Business Owner',
+      content: 'The platform made it so easy to find the right creators for my boutique. Results exceeded expectations!',
+      rating: 5
+    }
   ];
 
   return (
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        position: 'relative',
+        background: `
+          linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url(${heroBackground})
+        `,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
+        backgroundRepeat: 'no-repeat',
       }}
     >
       {/* Hero Section */}
-      <Box
-        sx={{
-          background: `
-            linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%),
-            url(${heroBackground})
-          `,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundAttachment: isMobile ? 'scroll' : 'fixed',
-          color: 'white',
-          minHeight: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
+      <Box>
         {/* Header */}
         <Header 
           transparent={true}
@@ -236,7 +312,7 @@ const Home = () => {
 
             {/* Stats Section */}
             <Fade in timeout={2500}>
-              <Grid container spacing={3} sx={{ mt: 6, justifyContent: 'center', alignItems: 'center',}}>
+              <Grid container spacing={3} sx={{ mt: 6, justifyContent: 'center', alignItems: 'center' }}>
                 {stats.map((stat, index) => (
                   <Grid item xs={6} md={3} key={index}>
                     <Box
@@ -278,53 +354,39 @@ const Home = () => {
 
       {/* Features Section */}
       <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Slide in={scrollTriggered} timeout={2000} direction="up">
-        <Typography 
-          variant="h2"
-          component="h2" 
-          textAlign="center" 
-          fontWeight="bold"
-          sx={{
-            mb: 2,
-            background: 'linear-gradient(45deg, #ffffff, #ffde22)',
-            backgroundClip: 'text',
-            WebkitBackgroundClip: 'text',
-            color: 'transparent',
-          }}
-        >
-          Why Choose CreatorConnect?
-        </Typography>
+        <Slide in={scrollTriggered} timeout={1000} direction="up">
+          <Typography 
+            variant="h2"
+            component="h2" 
+            textAlign="center" 
+            fontWeight="bold"
+            sx={{
+              mb: 2,
+              background: 'linear-gradient(45deg, #ffffff, #ffde22)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              color: 'transparent',
+            }}
+          >
+            Why Choose SpotSource?
+          </Typography>
         </Slide>
         <Slide in={scrollTriggered} timeout={2000} direction="up">
-        <Typography 
-          variant="h5" 
-          textAlign="center" 
-          sx={{ mb: 6, color: 'white', opacity: 0.9 }}
-        >
-          The perfect platform connecting businesses with talented content creators
-        </Typography>
+          <Typography 
+            variant="h5" 
+            textAlign="center" 
+            sx={{ mb: 6, color: 'white', opacity: 0.9 }}
+          >
+            The perfect platform connecting businesses with talented content creators
+          </Typography>
         </Slide>
-        <Grid container spacing={4}
-        sx={{
-            display: 'flex',
-            flexWrap: 'nowrap', // This prevents wrapping to new rows
-            justifyContent: 'center',
-            alignItems: 'stretch',
-            overflowX: 'auto', // Allows horizontal scrolling if needed on small screens
-            '& > .MuiGrid-item': {
-              flex: '0 0 auto', // Prevents items from growing/shrinking
-            },
-            // For mobile view, we want it to wrap normally
-            [theme.breakpoints.down('md')]: {
-              flexWrap: 'wrap',
-              overflowX: 'visible',
-            }
-          }}>
+        <Grid container spacing={4}>
           {featureBoxes.map((box, index) => {
             const IconComponent = box.icon;
             return (
-              <Grid item xs={12} md={4} key={index}>
+              <Grid item xs={12} md={4} size={4} key={index}>
                 <Card
+                  onClick={box.onClick}
                   sx={{
                     background: box.gradient,
                     color: 'white',
@@ -337,12 +399,17 @@ const Home = () => {
                     animationDelay: `${index * 0.3}s`,
                     position: 'relative',
                     overflow: 'hidden',
+                    cursor: 'pointer',
                     '&:hover': {
                       transform: 'translateY(-10px) scale(1.02)',
                       boxShadow: '0 25px 50px rgba(0,0,0,0.3)',
                       '& .feature-icon': {
                         animation: `${floatAnimation} 1s ease-in-out infinite`,
                         transform: 'scale(1.1)',
+                      },
+                      '& .click-hint': {
+                        opacity: 1,
+                        transform: 'translateY(0)',
                       }
                     }
                   }}
@@ -382,11 +449,329 @@ const Home = () => {
                       </Box>
                     ))}
                   </Box>
+
+                  {/* Click Hint */}
+                  <Box 
+                    className="click-hint"
+                    sx={{
+                      position: 'absolute',
+                      bottom: 20,
+                      left: 0,
+                      right: 0,
+                      textAlign: 'center',
+                      opacity: 0,
+                      transform: 'translateY(10px)',
+                      transition: 'all 0.3s ease',
+                    }}
+                  >
+                    <Chip 
+                      label="Click to explore" 
+                      size="small"
+                      sx={{
+                        background: 'rgba(255,255,255,0.2)',
+                        color: 'white',
+                        border: '1px solid rgba(255,255,255,0.3)',
+                      }}
+                    />
+                  </Box>
                 </Card>
               </Grid>
             );
           })}
         </Grid>
+      </Container>
+
+      {/* How It Works Section */}
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Typography 
+          variant="h2" 
+          component="h2" 
+          textAlign="center" 
+          fontWeight="bold"
+          sx={{
+            mb: 2,
+            background: 'linear-gradient(45deg, #ffffff, #ffde22)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            color: 'transparent',
+          }}
+        >
+          How It Works
+        </Typography>
+        <Typography 
+          variant="h5" 
+          textAlign="center" 
+          sx={{ mb: 6, color: 'white', opacity: 0.9 }}
+        >
+          Simple steps to start your creative journey
+        </Typography>
+
+        <Grid container spacing={4}>
+          {processSteps.map((step, index) => (
+            <Grid item xs={12} md={6} size={6} lg={3} key={index}>
+              <Card
+                sx={{
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  borderRadius: '20px',
+                  p: 4,
+                  textAlign: 'center',
+                  color: 'white',
+                  height: '100%',
+                  transition: 'all 0.3s ease',
+                  animation: `${floatAnimation} 5s ease-in-out infinite`,
+                  animationDelay: `${index * 0.4}s`,
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: '0 15px 30px rgba(255, 222, 34, 0.2)',
+                  }
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 60,
+                    height: 60,
+                    background: 'linear-gradient(135deg, #ffde22, #ff6b6b)',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: '0 auto 20px',
+                    fontWeight: 'bold',
+                    fontSize: '1.2rem',
+                    color: 'black',
+                  }}
+                >
+                  {step.step}
+                </Box>
+                <Box sx={{ color: '#ffde22', mb: 2 }}>
+                  {step.icon}
+                </Box>
+                <Typography variant="h5" component="h3" gutterBottom fontWeight="bold">
+                  {step.title}
+                </Typography>
+                <Typography variant="body1" sx={{ opacity: 0.9 }}>
+                  {step.description}
+                </Typography>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+
+      {/* Success Stories Section */}
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Typography 
+          variant="h2" 
+          component="h2" 
+          textAlign="center" 
+          fontWeight="bold"
+          sx={{
+            mb: 2,
+            background: 'linear-gradient(45deg, #ffffff, #ffde22)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            color: 'transparent',
+          }}
+        >
+          Success Stories
+        </Typography>
+        <Typography 
+          variant="h5" 
+          textAlign="center" 
+          sx={{ mb: 6, color: 'white', opacity: 0.9 }}
+        >
+          Hear from our amazing community
+        </Typography>
+
+        <Grid container spacing={4}>
+          {testimonials.map((testimonial, index) => (
+            <Grid item xs={12} size={4} md={4} key={index}>
+              <Card
+                sx={{
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  borderRadius: '20px',
+                  p: 4,
+                  color: 'white',
+                  height: '100%',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: '0 15px 30px rgba(255, 222, 34, 0.1)',
+                  }
+                }}
+              >
+                <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} sx={{ color: '#ffde22', fontSize: 20 }} />
+                  ))}
+                </Box>
+                <Typography variant="body1" sx={{ mb: 3, fontStyle: 'italic', lineHeight: 1.6 }}>
+                  "{testimonial.content}"
+                </Typography>
+                <Box>
+                  <Typography variant="h6" fontWeight="bold">
+                    {testimonial.name}
+                  </Typography>
+                  <Typography variant="body2" sx={{ opacity: 0.8 }}>
+                    {testimonial.role}
+                  </Typography>
+                </Box>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+
+      {/* Quick Stats Section */}
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Paper
+          sx={{
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255,255,255,0.2)',
+            borderRadius: '25px',
+            p: 6,
+            color: 'white',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Grid container spacing={4} justifyContent="center" alignItems="center">
+            <Grid item xs={12} md={3}>
+              <Box 
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100%',
+                }}
+              >
+                <Typography 
+                  variant="h2" 
+                  component="div" 
+                  fontWeight="bold" 
+                  color="#ffde22"
+                  sx={{
+                    lineHeight: 1.2,
+                    mb: 1,
+                  }}
+                >
+                  500+
+                </Typography>
+                <Typography 
+                  variant="h6"
+                  sx={{
+                    textAlign: 'center',
+                  }}
+                >
+                  Successful Projects
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <Box 
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100%',
+                }}
+              >
+                <Typography 
+                  variant="h2" 
+                  component="div" 
+                  fontWeight="bold" 
+                  color="#ffde22"
+                  sx={{
+                    lineHeight: 1.2,
+                    mb: 1,
+                  }}
+                >
+                  50+
+                </Typography>
+                <Typography 
+                  variant="h6"
+                  sx={{
+                    textAlign: 'center',
+                  }}
+                >
+                  Cities Covered
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <Box 
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100%',
+                }}
+              >
+                <Typography 
+                  variant="h2" 
+                  component="div" 
+                  fontWeight="bold" 
+                  color="#ffde22"
+                  sx={{
+                    lineHeight: 1.2,
+                    mb: 1,
+                  }}
+                >
+                  98%
+                </Typography>
+                <Typography 
+                  variant="h6"
+                  sx={{
+                    textAlign: 'center',
+                  }}
+                >
+                  Satisfaction Rate
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <Box 
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100%',
+                }}
+              >
+                <Typography 
+                  variant="h2" 
+                  component="div" 
+                  fontWeight="bold" 
+                  color="#ffde22"
+                  sx={{
+                    lineHeight: 1.2,
+                    mb: 1,
+                  }}
+                >
+                  24h
+                </Typography>
+                <Typography 
+                  variant="h6"
+                  sx={{
+                    textAlign: 'center',
+                  }}
+                >
+                  Average Response
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+        </Paper>
       </Container>
 
       {/* CTA Section */}
@@ -401,9 +786,11 @@ const Home = () => {
             textAlign: 'center',
             color: 'white',
             animation: `${glowAnimation} 3s ease-in-out infinite`,
+            position: 'relative',
+            overflow: 'hidden',
           }}
         >
-          {/* Background Image with Overlay */}
+          {/* Background Pattern */}
           <Box
             sx={{
               position: 'absolute',
@@ -411,75 +798,114 @@ const Home = () => {
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundImage: 'url("https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              opacity: 0.15,
+              background: `
+                radial-gradient(circle at 20% 80%, rgba(255, 222, 34, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(79, 172, 254, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(245, 87, 108, 0.05) 0%, transparent 50%)
+              `,
               zIndex: 0,
             }}
           />
-          <Typography 
-            variant="h3" 
-            component="h2" 
-            gutterBottom 
-            fontWeight="bold"
-            sx={{
-              mb: 3,
-              background: 'linear-gradient(45deg, #ffffff, #ffde22)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              color: 'transparent',
-            }}
-          >
-            Ready to Transform Your Digital Presence?
-          </Typography>
           
-          <Typography 
-            variant="h6" 
-            sx={{ 
-              mb: 4,
-              opacity: 0.9,
-              maxWidth: '600px',
-              margin: '0 auto',
-            }}
-          >
-            Join thousands of businesses and creators who are already achieving amazing results
-          </Typography>
-
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, mb: 4 }}>
-            <TrendingUp sx={{ fontSize: 40, color: '#ffde22' }} />
-            <Typography variant="h6" fontWeight="medium" color="#ffde22">
-              95% Client Satisfaction Rate
+          <Box position="relative" zIndex={1}>
+            <Typography 
+              variant="h3" 
+              component="h2" 
+              gutterBottom 
+              fontWeight="bold"
+              sx={{
+                mb: 3,
+                background: 'linear-gradient(45deg, #ffffff, #ffde22)',
+                backgroundClip: 'text',
+                WebkitBackgroundClip: 'text',
+                color: 'transparent',
+              }}
+            >
+              Ready to Transform Your Digital Presence?
             </Typography>
-          </Box>
-
-          <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <GradientButton
-              component={Link}
-              to="/services"
-              gradient="linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
-              shadowColor="rgba(67, 233, 123, 0.4)"
-              size="large"
-            >
-              Explore Services
-            </GradientButton>
             
-            <GradientButton
-              component={Link}
-              to="/contactus"
-              gradient="linear-gradient(135deg, #fa709a 0%, #fee140 100%)"
-              shadowColor="rgba(250, 112, 154, 0.4)"
-              size="large"
-              startIcon={<Star />}
+            <Typography 
+              variant="h6" 
+              sx={{ 
+                mb: 4,
+                opacity: 0.9,
+                maxWidth: '600px',
+                margin: '0 auto',
+              }}
             >
-              Start Your Journey
-            </GradientButton>
+              Join thousands of businesses and creators who are already achieving amazing results
+            </Typography>
+
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, mb: 4 }}>
+              <TrendingUp sx={{ fontSize: 40, color: '#ffde22' }} />
+              <Typography variant="h6" fontWeight="medium" color="#ffde22">
+                95% Client Satisfaction Rate
+              </Typography>
+            </Box>
+
+            <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <GradientButton
+                onClick={() => window.location.href = '/services'}
+                gradient="linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
+                shadowColor="rgba(67, 233, 123, 0.4)"
+                size="large"
+                endIcon={<ArrowForward />}
+              >
+                Explore Services
+              </GradientButton>
+              
+              <GradientButton
+                onClick={() => window.location.href = '/contactus#creator-form'}
+                gradient="linear-gradient(135deg, #fa709a 0%, #fee140 100%)"
+                shadowColor="rgba(250, 112, 154, 0.4)"
+                size="large"
+                startIcon={<Star />}
+              >
+                Start Your Journey
+              </GradientButton>
+            </Box>
+
+            {/* Quick Action Buttons */}
+            <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap', mt: 4 }}>
+              <Button
+                onClick={() => window.location.href = '/contactus#business-form'}
+                startIcon={<LocationOn />}
+                sx={{
+                  color: '#ffde22',
+                  border: '1px solid #ffde22',
+                  borderRadius: '20px',
+                  px: 3,
+                  '&:hover': {
+                    background: '#ffde22',
+                    color: 'black',
+                  }
+                }}
+              >
+                Find Local Talent
+              </Button>
+              <Button
+                component={Link}
+                onClick={() => window.location.href = '/contactus'}
+                startIcon={<Schedule />}
+                sx={{
+                  color: '#4facfe',
+                  border: '1px solid #4facfe',
+                  borderRadius: '20px',
+                  px: 3,
+                  '&:hover': {
+                    background: '#4facfe',
+                    color: 'white',
+                  }
+                }}
+              >
+                Book Consultation
+              </Button>
+            </Box>
           </Box>
         </Box>
       </Container>
-      <Layout>
-    </Layout>
+      
+      <Layout />
     </Box>
   );
 };

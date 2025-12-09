@@ -20,6 +20,12 @@ import {
   Step,
   StepLabel,
   Paper,
+  List,
+  Slide,
+  ListItem,
+  Grow,
+  ListItemIcon,
+  ListItemText,
 } from '@mui/material';
 import {
   Campaign,
@@ -36,6 +42,12 @@ import {
   Schedule,
   Business, 
   Work,
+  Security,
+  Analytics,
+  SupportAgent,
+  RocketLaunch,
+  Groups,
+  EmojiEvents,
 } from '@mui/icons-material';
 import { keyframes } from '@emotion/react';
 import girlCreator from '../assets/images/services.jpg';
@@ -230,7 +242,6 @@ const Services = () => {
       {/* Hero Section */}
       <Box
         sx={{
-          // background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%)',
           color: 'white',
           py: 12,
           textAlign: 'center',
@@ -239,6 +250,7 @@ const Services = () => {
         }}
       >
         <Container maxWidth="lg">
+          <Grow in={true} timeout={2000}>
           <Typography 
             variant="h1" 
             component="h1"
@@ -255,7 +267,8 @@ const Services = () => {
           >
             {heroData.title}
           </Typography>
-          
+          </Grow>
+          <Slide in timeout={1500} direction="up">
           <Typography 
             variant="h4" 
             sx={{ 
@@ -266,6 +279,7 @@ const Services = () => {
           >
             {heroData.subtitle}
           </Typography>
+          </Slide>
 
           <Box
             sx={{
@@ -279,6 +293,7 @@ const Services = () => {
               animation: `${glowAnimation} 3s ease-in-out infinite`,
             }}
           >
+            <Grow in={true} timeout={2000}>
             <Typography 
               variant="h5" 
               component="div"
@@ -291,12 +306,15 @@ const Services = () => {
             >
               "{heroData.tagline}"
             </Typography>
+            </Grow>
+
           </Box>
         </Container>
       </Box>
 
       {/* Two Sides Section */}
       <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Grow in={true} timeout={2000}>
         <Typography 
           variant="h2" 
           component="h2" 
@@ -312,10 +330,11 @@ const Services = () => {
         >
           Choose Your Path to Success
         </Typography>
+        </Grow>
 
         <Grid container spacing={4}>
           {/* User Side */}
-          <Grid item xs={12} md={6} size={6}>
+          <Grid item xs={12} size={6} md={6}>
             <Card
               sx={{
                 background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
@@ -374,7 +393,7 @@ const Services = () => {
           </Grid>
 
           {/* Client Side */}
-          <Grid item xs={12} md={6} size={6}>
+          <Grid item xs={12} size={6} md={6}>
             <Card
               sx={{
                 background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
@@ -412,7 +431,7 @@ const Services = () => {
               <Button
                 variant="contained"
                 size="large"
-                onClick={handleContactRedirect}
+                onClick={handleClientOpen} // Changed to open dialog instead of redirect
                 sx={{
                   background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
                   color: 'white',
@@ -529,7 +548,7 @@ const Services = () => {
 
         <Grid container spacing={4} justifyContent="center" alignItems="stretch">
           {packages.map((pkg, index) => (
-            <Grid item xs={12} size={4} md={4} key={index} sx={{ display: 'flex' }}>
+            <Grid size={4} item xs={12} md={4} key={index} sx={{ display: 'flex' }}>
               <Card
                 sx={{
                   background: pkg.gradient,
@@ -619,6 +638,298 @@ const Services = () => {
         </Grid>
       </Container>
 
+      {/* Why Choose Us Section - New Content */}
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Typography 
+          variant="h2" 
+          component="h2" 
+          textAlign="center" 
+          fontWeight="bold"
+          sx={{
+            mb: 2,
+            background: 'linear-gradient(45deg, #ffffff, #ffde22)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            color: 'transparent',
+          }}
+        >
+          Why Choose SpotSource?
+        </Typography>
+        <Typography 
+          variant="h5" 
+          textAlign="center" 
+          sx={{ mb: 6, color: 'white', opacity: 0.9 }}
+        >
+          We combine creativity with data-driven strategies to deliver exceptional results
+        </Typography>
+
+        <Grid container spacing={4}>
+          {/* Card 1: Our Approach */}
+          <Grid item xs={12} size={4} md={6} lg={3}>
+            <Card
+              sx={{
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '25px',
+                p: 4,
+                height: '100%',
+                color: 'white',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: '0 15px 30px rgba(255, 222, 34, 0.2)',
+                }
+              }}
+              
+            >
+              <Typography variant="h4" component="h3" gutterBottom fontWeight="bold" textAlign="center">
+                Our Approach
+              </Typography>
+              <List>
+                {[
+                  { icon: <RocketLaunch />, text: 'Fast & Agile Execution' },
+                  { icon: <Analytics />, text: 'Data-Driven Decision Making' },
+                  { icon: <Groups />, text: 'Dedicated Team of Experts' },
+                  { icon: <Security />, text: 'Transparent Reporting' },
+                ].map((item, index) => (
+                  <ListItem key={index} sx={{ px: 0 }}>
+                    <ListItemIcon sx={{ color: '#ffde22', minWidth: 40 }}>
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText primary={item.text} />
+                  </ListItem>
+                ))}
+              </List>
+            </Card>
+          </Grid>
+
+          {/* Card 2: Core Values */}
+          <Grid item xs={12} size={4} md={6} lg={3}>
+            <Card
+              sx={{
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '25px',
+                p: 4,
+                height: '100%',
+                color: 'white',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: '0 15px 30px rgba(255, 222, 34, 0.2)',
+                }
+              }}
+            >
+              <Typography variant="h4" component="h3" gutterBottom fontWeight="bold" textAlign="center">
+                Core Values
+              </Typography>
+              <List>
+                {[
+                  { icon: <EmojiEvents />, text: 'Excellence in Delivery' },
+                  { icon: <SupportAgent />, text: 'Client-Centric Approach' },
+                  { icon: <TrendingUp />, text: 'Continuous Innovation' },
+                  { icon: <People />, text: 'Collaborative Partnership' },
+                ].map((item, index) => (
+                  <ListItem key={index} sx={{ px: 0 }}>
+                    <ListItemIcon sx={{ color: '#ffde22', minWidth: 40 }}>
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText primary={item.text} />
+                  </ListItem>
+                ))}
+              </List>
+            </Card>
+          </Grid>
+
+          {/* Card 3: What We Deliver */}
+          <Grid item xs={12} size={4} md={6} lg={3}>
+            <Card
+              sx={{
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: '25px',
+                p: 4,
+                height: '100%',
+                color: 'white',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: '0 15px 30px rgba(255, 222, 34, 0.2)',
+                }
+              }}
+            >
+              <Typography variant="h4" component="h3" gutterBottom fontWeight="bold" textAlign="center">
+                What We Deliver
+              </Typography>
+              <List>
+                {[
+                  { icon: <Campaign />, text: 'Increased Brand Visibility' },
+                  { icon: <Search />, text: 'Higher Conversion Rates' },
+                  { icon: <PhotoCamera />, text: 'Quality Content Creation' },
+                  { icon: <Event />, text: 'Measurable ROI' },
+                ].map((item, index) => (
+                  <ListItem key={index} sx={{ px: 0 }}>
+                    <ListItemIcon sx={{ color: '#ffde22', minWidth: 40 }}>
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText primary={item.text} />
+                  </ListItem>
+                ))}
+              </List>
+            </Card>
+          </Grid>
+        </Grid>
+
+        <Grid item xs={12} md={6} p={6}>
+          <Card
+            sx={{
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255,255,255,0.2)',
+              borderRadius: '25px',
+              p: 4,
+              height: '100%',
+              color: 'white',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography variant="h4" component="h3" gutterBottom fontWeight="bold" textAlign="center">
+              Success Metrics
+            </Typography>
+            <Grid 
+              container 
+              spacing={3} 
+              sx={{ 
+                mt: 2,
+                alignItems: 'center',
+                justifyContent: 'center',
+                flex: 1,
+              }}
+            >
+              {[
+                { number: '200+', label: 'Happy Clients' },
+                { number: '500+', label: 'Projects Completed' },
+                { number: '85%', label: 'Client Retention' },
+                { number: '24h', label: 'Response Time' },
+                { number: '50+', label: 'Cities Covered' },
+                { number: '98%', label: 'Satisfaction Rate' }
+              ].map((metric, index) => (
+                <Grid item xs={6} sm={4} key={index}>
+                  <Box 
+                    textAlign="center"
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      height: '100%',
+                    }}
+                  >
+                    <Typography 
+                      variant="h3" 
+                      component="div" 
+                      fontWeight="bold" 
+                      color="#ffde22"
+                      sx={{
+                        lineHeight: 1.2,
+                        mb: 1,
+                      }}
+                    >
+                      {metric.number}
+                    </Typography>
+                    <Typography 
+                      variant="body1" 
+                      sx={{ 
+                        opacity: 0.9,
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      {metric.label}
+                    </Typography>
+                  </Box>
+                </Grid>
+              ))}
+            </Grid>
+          </Card>
+        </Grid>
+      </Container>
+
+      {/* Process Section - New Content */}
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Typography 
+          variant="h2" 
+          component="h2" 
+          textAlign="center" 
+          fontWeight="bold"
+          sx={{
+            mb: 6,
+            background: 'linear-gradient(45deg, #ffffff, #ffde22)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            color: 'transparent',
+          }}
+        >
+          How It Works
+        </Typography>
+
+        <Grid container spacing={4}>
+          {[
+            { step: '01', title: 'Consultation', desc: 'We understand your business goals and requirements' },
+            { step: '02', title: 'Strategy', desc: 'Customized marketing plan tailored to your needs' },
+            { step: '03', title: 'Execution', desc: 'Our team implements the strategy with precision' },
+            { step: '04', title: 'Optimization', desc: 'Continuous monitoring and improvement for best results' }
+          ].map((process, index) => (
+            <Grid item xs={12} size={6} sm={6} md={3} key={index}>
+              <Card
+                sx={{
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  borderRadius: '25px',
+                  p: 3,
+                  textAlign: 'center',
+                  color: 'white',
+                  height: '100%',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: '0 15px 30px rgba(255, 222, 34, 0.2)',
+                  }
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 60,
+                    height: 60,
+                    background: 'linear-gradient(135deg, #ffde22, #ff6b6b)',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: '0 auto 20px',
+                    fontWeight: 'bold',
+                    fontSize: '1.2rem',
+                  }}
+                >
+                  {process.step}
+                </Box>
+                <Typography variant="h5" component="h3" gutterBottom fontWeight="bold">
+                  {process.title}
+                </Typography>
+                <Typography variant="body1" sx={{ opacity: 0.9 }}>
+                  {process.desc}
+                </Typography>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+
       {/* Additional CTA Section */}
       <Box sx={{ position: 'relative', zIndex: 1 }}>
         <Container maxWidth="lg" sx={{ py: 8 }}>
@@ -672,7 +983,7 @@ const Services = () => {
                   color: '#ffde22',
                   px: 4,
                   py: 1.5,
-                  borderRadius: '25px',
+                  borderRadius: '2525px',
                   fontWeight: 'bold',
                   '&:hover': {
                     background: '#ffde22',
@@ -775,74 +1086,289 @@ const Services = () => {
           </Button>
         </DialogActions>
       </Dialog>
-
-      {/* Client Package Dialog */}
+      
+      {/* Client Package Dialog - Compact Version */}
       <Dialog 
         open={openClientDialog} 
         onClose={handleClientClose}
         maxWidth="lg"
         fullWidth
+        PaperProps={{
+          sx: {
+            background: 'linear-gradient(135deg, rgba(13, 13, 13, 0.95) 0%, rgba(25, 25, 35, 0.95) 100%)',
+            backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255, 222, 34, 0.3)',
+            borderRadius: '25px',
+            boxShadow: '0 25px 50px rgba(0, 0, 0, 0.5)',
+            overflow: 'hidden',
+            maxHeight: '90vh',
+          }
+        }}
       >
-        <DialogTitle>
-          <Typography variant="h4" component="div" fontWeight="bold">
+        {/* Background Glow Effect */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '3px',
+            background: 'linear-gradient(90deg, #ff6b6b, #ffde22, #4facfe, #43e97b)',
+            backgroundSize: '400% 400%',
+            animation: `${glowAnimation} 3s ease-in-out infinite`,
+          }}
+        />
+        
+        <DialogTitle sx={{ pb: 1, textAlign: 'center', position: 'relative' }}>
+          <Typography 
+            variant="h4" 
+            component="div" 
+            fontWeight="bold"
+            sx={{
+              background: 'linear-gradient(45deg, #ffde22, #ff6b6b, #4facfe)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              color: 'transparent',
+              backgroundSize: '300% 300%',
+              animation: `${floatAnimation} 6s ease-in-out infinite`,
+              mb: 0.5,
+            }}
+          >
             Choose Your Marketing Package
+          </Typography>
+          <Typography 
+            variant="subtitle1" 
+            sx={{ 
+              color: 'rgba(255, 255, 255, 0.8)',
+              fontWeight: 300,
+            }}
+          >
+            Select the perfect plan to boost your digital presence
           </Typography>
         </DialogTitle>
         
-        <DialogContent>
-          <Grid container spacing={3}>
+        <DialogContent sx={{ py: 2 }}>
+          <Grid container spacing={2} justifyContent="center">
             {packages.map((pkg, index) => (
-              <Grid item xs={12} md={4} key={index}>
+              <Grid item xs={12} md={4} key={index} sx={{ display: 'flex' }}>
                 <Card
                   sx={{
-                    border: pkg.popular ? '2px solid gold' : '1px solid #e0e0e0',
-                    borderRadius: '15px',
-                    p: 3,
-                    textAlign: 'center',
+                    background: pkg.gradient,
+                    color: 'white',
+                    borderRadius: '18px',
+                    p: 0,
+                    width: '100%',
                     position: 'relative',
+                    overflow: 'hidden',
+                    transition: 'all 0.3s ease',
+                    animation: `${floatAnimation} 4s ease-in-out infinite`,
+                    animationDelay: `${index * 0.2}s`,
+                    '&:hover': {
+                      transform: 'translateY(-5px) scale(1.02)',
+                      boxShadow: '0 20px 40px rgba(0,0,0,0.6)',
+                    },
+                    border: pkg.popular ? '2px solid gold' : '1px solid rgba(255,255,255,0.2)',
                   }}
                 >
+                  {/* Popular Badge */}
                   {pkg.popular && (
-                    <Chip 
-                      label="MOST POPULAR" 
-                      color="warning" 
-                      sx={{ position: 'absolute', top: -10, left: '50%', transform: 'translateX(-50%)' }}
-                    />
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        top: 12,
+                        right: 12,
+                        background: 'linear-gradient(135deg, gold, #ffd700)',
+                        color: 'black',
+                        px: 2,
+                        py: 0.5,
+                        borderRadius: '15px',
+                        fontWeight: 'bold',
+                        fontSize: '0.7rem',
+                        animation: `${glowAnimation} 2s ease-in-out infinite`,
+                        boxShadow: '0 3px 10px rgba(255, 215, 0, 0.4)',
+                        zIndex: 2,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 0.3,
+                      }}
+                    >
+                      <Star sx={{ fontSize: 14 }} />
+                      POPULAR
+                    </Box>
                   )}
-                  
-                  <Typography variant="h5" component="h3" gutterBottom fontWeight="bold">
-                    {pkg.name}
-                  </Typography>
-                  
-                  <Box sx={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', mb: 2 }}>
-                    <Typography variant="h4" component="div" fontWeight="bold" color="primary">
-                      ₹{pkg.price}
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary" sx={{ ml: 1 }}>
-                      /{pkg.duration}
-                    </Typography>
-                  </Box>
 
-                  <Box sx={{ mb: 3 }}>
-                    {pkg.features.map((feature, idx) => (
-                      <Box key={idx} sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                        <CheckCircle sx={{ color: 'green', mr: 1, fontSize: 18 }} />
-                        <Typography variant="body2">{feature}</Typography>
-                      </Box>
-                    ))}
-                  </Box>
+                  {/* Card Content */}
+                  <CardContent sx={{ p: 3, position: 'relative', zIndex: 1 }}>
+                    {/* Package Name */}
+                    <Typography 
+                      variant="h5" 
+                      component="h3" 
+                      gutterBottom 
+                      fontWeight="bold"
+                      sx={{
+                        textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+                        mb: 2,
+                        fontSize: '1.5rem',
+                      }}
+                    >
+                      {pkg.name}
+                    </Typography>
+                    
+                    {/* Price Section */}
+                    <Box 
+                      sx={{ 
+                        display: 'flex', 
+                        alignItems: 'baseline', 
+                        justifyContent: 'center', 
+                        mb: 2,
+                        background: 'rgba(255,255,255,0.1)',
+                        borderRadius: '12px',
+                        py: 1.5,
+                        mx: -1,
+                      }}
+                    >
+                      <Typography 
+                        variant="h3" 
+                        component="div" 
+                        fontWeight="bold"
+                        sx={{
+                          textShadow: '2px 2px 8px rgba(0,0,0,0.4)',
+                          fontSize: '2rem',
+                        }}
+                      >
+                        ₹{pkg.price}
+                      </Typography>
+                      <Typography 
+                        variant="body1" 
+                        sx={{ 
+                          ml: 1, 
+                          opacity: 0.9,
+                          fontWeight: 300,
+                        }}
+                      >
+                        /{pkg.duration}
+                      </Typography>
+                    </Box>
 
-                  <Button variant="contained" fullWidth onClick={handleContactRedirect}>
-                    Select Package
-                  </Button>
+                    {/* Features List */}
+                    <Box sx={{ mb: 3 }}>
+                      {pkg.features.map((feature, idx) => (
+                        <Box 
+                          key={idx} 
+                          sx={{ 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            mb: 1,
+                            background: 'rgba(255,255,255,0.05)',
+                            borderRadius: '8px',
+                            p: 1,
+                            transition: 'all 0.2s ease',
+                            '&:hover': {
+                              background: 'rgba(255,255,255,0.08)',
+                              transform: 'translateX(3px)',
+                            }
+                          }}
+                        >
+                          <CheckCircle 
+                            sx={{ 
+                              color: 'limegreen', 
+                              mr: 1.5, 
+                              fontSize: 20,
+                              minWidth: '20px',
+                              filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))',
+                            }} 
+                          />
+                          <Typography 
+                            variant="body2" 
+                            sx={{
+                              fontWeight: 500,
+                              textShadow: '1px 1px 2px rgba(0,0,0,0.3)',
+                              fontSize: '0.85rem',
+                              lineHeight: 1.3,
+                            }}
+                          >
+                            {feature}
+                          </Typography>
+                        </Box>
+                      ))}
+                    </Box>
+
+                    {/* Select Button */}
+                    <Button
+                      variant="contained"
+                      fullWidth
+                      size="medium"
+                      onClick={handleContactRedirect}
+                      sx={{
+                        background: pkg.popular 
+                          ? 'linear-gradient(135deg, #ffde22, #ffb347)'
+                          : 'rgba(255,255,255,0.2)',
+                        color: pkg.popular ? 'black' : 'white',
+                        py: 1.2,
+                        borderRadius: '12px',
+                        border: pkg.popular ? 'none' : '1px solid rgba(255,255,255,0.3)',
+                        fontWeight: 'bold',
+                        fontSize: '0.9rem',
+                        textTransform: 'none',
+                        boxShadow: pkg.popular 
+                          ? '0 6px 20px rgba(255, 222, 34, 0.4)'
+                          : '0 3px 10px rgba(0,0,0,0.2)',
+                        transition: 'all 0.2s ease',
+                        '&:hover': {
+                          background: pkg.popular 
+                            ? 'linear-gradient(135deg, #ffb347, #ffde22)'
+                            : 'rgba(255,255,255,0.25)',
+                          transform: 'translateY(-2px)',
+                          boxShadow: pkg.popular 
+                            ? '0 8px 25px rgba(255, 222, 34, 0.6)'
+                            : '0 6px 20px rgba(0,0,0,0.3)',
+                        }
+                      }}
+                    >
+                      {pkg.popular ? 'Get Started Now' : `Choose ${pkg.name}`}
+                      <ArrowForward sx={{ ml: 0.5, fontSize: 18 }} />
+                    </Button>
+                  </CardContent>
+
+                  {/* Subtle Pattern Overlay */}
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      background: `
+                        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%)
+                      `,
+                      pointerEvents: 'none',
+                    }}
+                  />
                 </Card>
               </Grid>
             ))}
           </Grid>
         </DialogContent>
         
-        <DialogActions>
-          <Button onClick={handleClientClose}>Close</Button>
+        <DialogActions sx={{ p: 3, pt: 1 }}>
+          <Button 
+            onClick={handleClientClose}
+            sx={{
+              color: 'rgba(255, 255, 255, 0.8)',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              borderRadius: '8px',
+              px: 3,
+              py: 0.8,
+              fontSize: '0.9rem',
+              '&:hover': {
+                background: 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+              }
+            }}
+          >
+            Close
+          </Button>
         </DialogActions>
       </Dialog>
       

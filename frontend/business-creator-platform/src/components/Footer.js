@@ -172,14 +172,14 @@ const Footer = () => {
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Phone sx={{ color: '#ffde22', fontSize: 20 }} />
                 <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.8)' }}>
-                  +1 (555) 123-4567
+                  +91 8096568749
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1 }}>
                 <LocationOn sx={{ color: '#ffde22', fontSize: 20, mt: 0.5 }} />
                 <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.8)' }}>
-                  123 Digital Street<br />
-                  Creative City, CC 10001
+                  Falt No:106, Chayamina Enclave<br />
+                  Kukatpally, Pillar No:769
                 </Typography>
               </Box>
             </Box>
@@ -202,17 +202,17 @@ const Footer = () => {
             © {new Date().getFullYear()} SpotSource. All rights reserved.
           </Typography>
           <Box sx={{ display: 'flex', gap: 3 }}>
-            <Link href="/privacy" color="inherit" sx={{ textDecoration: 'none', '&:hover': { color: '#ffde22' } }}>
+            <Link href="/" color="inherit" sx={{ textDecoration: 'none', '&:hover': { color: '#ffde22' } }}>
               <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)' }}>
                 Privacy Policy
               </Typography>
             </Link>
-            <Link href="/terms" color="inherit" sx={{ textDecoration: 'none', '&:hover': { color: '#ffde22' } }}>
+            <Link href="/" color="inherit" sx={{ textDecoration: 'none', '&:hover': { color: '#ffde22' } }}>
               <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)' }}>
                 Terms of Service
               </Typography>
             </Link>
-            <Link href="/cookies" color="inherit" sx={{ textDecoration: 'none', '&:hover': { color: '#ffde22' } }}>
+            <Link href="/" color="inherit" sx={{ textDecoration: 'none', '&:hover': { color: '#ffde22' } }}>
               <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)' }}>
                 Cookie Policy
               </Typography>
